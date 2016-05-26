@@ -1,0 +1,64 @@
+package com.whp.channel;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+
+public class NioChannelServer {
+	private ByteBuffer buff = ByteBuffer.allocate(1024);
+	private IntBuffer intBuff = buff.asIntBuffer();
+	private SocketChannel clientChannel = null;
+	private ServerSocketChannel serverChannel = null;
+	
+	public void openChannel() throws IOException{
+		serverChannel = ServerSocketChannel.open();
+		serverChannel.socket().bind(new InetSocketAddress(8888));
+		System.out.println("服务器通道已经打开");
+	}
+	
+	public void waitReqConn() throws IOException{
+		while(true){
+			clientChannel = serverChannel.accept();
+			if(null!=clientChannel){
+				System.out.println("新的连接加入！");
+			}
+			processReq();
+			clientChannel.close();
+		}
+	}
+	
+	public void processReq() throws IOException{
+		System.out.println("开始读取和处理客户端数据……");
+		buff.clear();
+		clientChannel.read(buff);
+		int result = intBuff.get(0)+intBuff.get(1);
+		buff.flip();
+		buff.clear();
+		intBuff.put(0,result);
+		clientChannel.write(buff);
+		System.out.println("读取和处理客户端数据完成。");
+		
+	}
+	public void start(){
+		try {
+			//
+			openChannel();
+			waitReqConn();
+			clientChannel.close();
+			System.out.println("服务端处理完毕……");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new NioChannelServer().start();
+	}
+
+}

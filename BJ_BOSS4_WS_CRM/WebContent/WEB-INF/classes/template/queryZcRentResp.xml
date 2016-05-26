@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boss4Result>
+	<item>
+		<tranCode>${_TRANCODE}</tranCode>
+		<SID>${_SID}</SID>
+		<retCode>${_CODE}</retCode>
+		<retInfo>${_DESC}</retInfo>
+		<baseval>${BASE_VAL}</baseval>
+	</item>
+</boss4Result>

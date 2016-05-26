@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" 
+	default-autowire="byName">
+	<bean id="onReportServiceImpl" class="com.asiainfo.report.webservice.OnReportServiceImpl"/>
+	<bean id="reportDispatch" class="com.asiainfo.report.action.ReportDispatchImpl" />
+	<bean id="reportBaseDao" class="com.asiainfo.report.dao.ReportBaseDaoImpl" />
+	
+	<!-- 财务营收统计-获取营收统计信息 -->
+	    <bean id="service_20009" class="com.asiainfo.report.service.DailyMisLoadImpl" />
+	<!-- 财务营收统计-保存营收统计信息 -->
+		<bean id="service_20002" class="com.asiainfo.report.service.DailyMisSaveImpl" />
+	<!-- 财务营收统计-查询营收统计信息 -->
+		<bean id="service_20003" class="com.asiainfo.report.service.DailyMisQueryImpl" />
+	<!-- 营业员日结算-获取日结算信息 -->
+		<bean id="service_20101" class="com.asiainfo.report.service.DailyBalanceLoadImpl" />
+	<!-- 营业员日结算-保存日结算信息 -->
+		<bean id="service_20102" class="com.asiainfo.report.service.DailyBalanceSaveImpl" />
+	<!-- 营业员日结算-查询日结算信息 -->
+		<bean id="service_20103" class="com.asiainfo.report.service.DailyBalanceQueryImpl" />
+	<!-- 厅台统计-按照单个营业厅、时间段 -->
+		<bean id="service_20201" class="com.asiainfo.report.service.HallStatisticByHallNoImpl" />
+	<!-- 厅台统计-按照多个营业厅、时间段 -->
+		<bean id="service_20202" class="com.asiainfo.report.service.HallStatisticByHallNoImpl" />
+	<!-- 厅台统计-按照营业员、时间段 -->
+		<bean id="service_20203" class="com.asiainfo.report.service.HallStatisticByOperatorImpl" />
+	<!-- 稽核统计-按照营业员、时间段查询 -->
+		<bean id="service_20204" class="com.asiainfo.report.service.DailyAuditQueryByOperatorImpl" />
+	<!-- 稽核统计-按照营业厅、时间查询 -->
+		<bean id="service_20205" class="com.asiainfo.report.service.DailyAuditQueryByHallNoImpl" />
+	<!-- 稽核统计-营业员日报保存 -->
+		<bean id="service_20206" class="com.asiainfo.report.service.DailyAuditSaveImpl" />
+    <!-- 业务量统计 -->
+        <bean id="service_20207" class="com.asiainfo.report.service.ReceiptStatisticImpl" />
+    <!-- 收据统计 -->
+        <bean id="service_20208" class="com.asiainfo.report.service.InvoiceStatisticImpl" />
+</beans>

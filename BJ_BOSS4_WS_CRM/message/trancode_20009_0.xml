@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccountQuery>
+	<item>
+		<tranCode>20009</tranCode>
+		<statisticDate>20160420</statisticDate>
+		<operatorId>109927</operatorId>
+		<hallNos>
+			<hallNo>10002714</hallNo>
+			<hallName></hallName>
+		</hallNos>
+		<flag>MIS</flag>
+		<hallType>0</hallType>
+	</item>
+</AccountQuery>

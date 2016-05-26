@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccountQuery>
+	<item>
+		<tranCode>20201</tranCode>
+		<startDate>20160424</startDate>
+		<endDate>20160424</endDate>
+		<hallNos>
+			<hallNo>10001118</hallNo>
+			<hallName></hallName>
+		</hallNos>
+	</item>
+</AccountQuery>

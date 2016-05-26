@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>WEB-INF/classes/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" class="com.asiainfo.boss4.dbcp.MyBasicDataSource">
+        <property name="driverClassName">
+            <value>${datasource.driverClassName}</value>
+        </property>
+        <property name="url">
+            <value>${datasource.url}</value>
+        </property>
+        <property name="username">
+            <value>${datasource.username}</value>
+        </property>
+        <property name="password">
+            <value>${datasource.password}</value>
+        </property>
+        <property name="initialSize">
+            <value>${datasource.initialSize}</value>
+        </property>
+        <property name="maxActive">
+            <value>${datasource.maxActive}</value>
+        </property>
+        <property name="maxWait">
+            <value>${datasource.maxWait}</value>
+        </property>
+        <property name="maxIdle">
+            <value>${datasource.maxIdle}</value>
+        </property>
+        <property name="minIdle">
+            <value>${datasource.minIdle}</value>
+        </property>
+		<property name="removeAbandoned">
+			<value>${datasource.removeAbandoned}</value>
+		</property> 
+		<property name="removeAbandonedTimeout">
+			<value>${datasource.removeAbandonedTimeout}</value>
+		</property> 
+		<property name="validationQuery">
+			<value>${datasource.validationQuery}</value>
+		</property> 
+		<property name="testOnBorrow">
+			<value>${datasource.testOnBorrow}</value>
+		</property>
+        <property name="testOnReturn">
+        	<value>${datasource.testOnReturn}</value>
+        </property>
+        <property name="testWhileIdle">
+        	<value>${datasource.testWhileIdle}</value>
+        </property>
+    </bean>
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource">
+            <ref local="dataSource" />
+        </property>
+        <property name="mappingDirectoryLocations">
+			<list>
+				<value>WEB-INF/classes/com/asiainfo/boss4/domain/</value>
+			</list>
+		</property>
+		<!-- <property name="packagesToScan">
+			<list>
+				<value>com.asiainfo.boss4.domain</value>
+			</list>
+		</property> -->
+		<property name="annotatedClasses">
+			<list>			
+				<value>com.asiainfo.boss4.domain.AccPosHallRelation</value>
+				<value>com.asiainfo.boss4.domain.AccPosHallRelationHis</value>
+				<value>com.asiainfo.boss4.domain.HighFeeNoPressStop</value>
+				<value>com.asiainfo.boss4.domain.HighFeeNoPressStopHis</value>
+				<value>com.asiainfo.boss4.domain.HighFeeProcParam</value>
+				<value>com.asiainfo.boss4.domain.IUserExtCond</value>
+				<value>com.asiainfo.boss4.domain.IUserExtCondHis</value>
+				<value>com.asiainfo.boss4.domain.IRentNotify</value>
+				<value>com.asiainfo.boss4.domain.IRentNotifyHis</value>
+				<value>com.asiainfo.boss4.domain.IRentNotifyErr</value>
+				<value>com.asiainfo.boss4.domain.PmSpOperatorCode</value>
+				<value>com.asiainfo.boss4.domain.ProdOutSp</value>
+				<value>com.asiainfo.boss4.domain.AccDefSmsTemplet</value>
+				<value>com.asiainfo.boss4.domain.AccDefSmsTempletHis</value>
+				<value>com.asiainfo.boss4.domain.PmFreebieRemindLevelSyx</value>
+				<value>com.asiainfo.boss4.domain.PmFreebieRemindLevel</value>
+				<value>com.asiainfo.boss4.domain.SmsJfMap</value>				
+				<value>com.asiainfo.boss4.domain.AccpSmsAlarmMsg</value>
+				<value>com.asiainfo.boss4.domain.AccSmsTempletDef</value>
+				<value>com.asiainfo.boss4.domain.OrderRelation</value>
+				<value>com.asiainfo.boss4.domain.OrderRelationHis</value>
+				<value>com.asiainfo.boss4.domain.AccKtInfo</value>
+				<value>com.asiainfo.boss4.domain.AccUserBillCycle</value>
+				<value>com.asiainfo.boss4.domain.AccAcctBillCycle</value>
+				<value>com.asiainfo.boss4.domain.AccBookChgNotifyLarge</value>
+				<value>com.asiainfo.boss4.domain.AccBookChgNotifyLargeInt</value>
+			    <value>com.asiainfo.boss4.domain.IUserVpmn</value>
+				<value>com.asiainfo.boss4.domain.CrmUserMonitor</value>
+				<value>com.asiainfo.boss4.domain.CrmUserMonitorHis</value>
+				<value>com.asiainfo.boss4.domain.IUserSmsOrder</value>
+				<value>com.asiainfo.boss4.domain.IUserSmsOrderHis</value>
+				<value>com.asiainfo.boss4.domain.CrmUserSmsOrder</value>
+				<value>com.asiainfo.boss4.domain.CrmUserCoinOrder</value>
+				<value>com.asiainfo.boss4.domain.BsGrtProduct</value>
+				<value>com.asiainfo.boss4.domain.AccBatchDeductOrder</value>
+				<value>com.asiainfo.boss4.domain.AccBatchDeductOrderHis</value>
+				<value>com.asiainfo.boss4.domain.OweNoPressStop</value>
+				<value>com.asiainfo.boss4.domain.OweNoPressStopHis</value>
+				<value>com.asiainfo.boss4.domain.OweNoPressStopRb</value>
+				<value>com.asiainfo.boss4.domain.OweMonitorSpecQuota</value>
+				<value>com.asiainfo.boss4.domain.OweMonitorSpecQuotaH</value>
+				
+				<value>com.asiainfo.boss4.domain.CrmUser</value>
+				<value>com.asiainfo.boss4.domain.CrmUserOther</value>
+				<value>com.asiainfo.boss4.domain.CrmUserHis</value>
+				<value>com.asiainfo.boss4.domain.CrmAccount</value>
+				<value>com.asiainfo.boss4.domain.CrmAccountHis</value>
+				<value>com.asiainfo.boss4.domain.CrmCustomer</value>
+				<value>com.asiainfo.boss4.domain.CrmCustomerHis</value>
+				<value>com.asiainfo.boss4.domain.CrmGroupMember</value>
+				<value>com.asiainfo.boss4.domain.CrmGroupMemberHis</value>
+				<value>com.asiainfo.boss4.domain.CrmGroupMemberGk</value>
+				<value>com.asiainfo.boss4.domain.IUserAll</value>
+				<value>com.asiainfo.boss4.domain.IUserRb</value>
+				<value>com.asiainfo.boss4.domain.IUserMapRb</value>
+				<value>com.asiainfo.boss4.domain.IUserStatusAll</value>
+				<value>com.asiainfo.boss4.domain.IUserStatusRb</value>
+				<value>com.asiainfo.boss4.domain.IUserSpromRb</value>
+				<value>com.asiainfo.boss4.domain.IUserEnterpriseRb</value>
+				<value>com.asiainfo.boss4.domain.IUserMscRb</value>
+				<value>com.asiainfo.boss4.domain.IUserRelationRb</value>
+				<value>com.asiainfo.boss4.domain.ICustomerAll</value>
+				<value>com.asiainfo.boss4.domain.ICustomerRb</value>
+				<value>com.asiainfo.boss4.domain.IAccount</value>
+				<value>com.asiainfo.boss4.domain.IAccountAll</value>
+				<value>com.asiainfo.boss4.domain.IAccountRb</value>
+				<value>com.asiainfo.boss4.domain.IUserPayRelationRb</value>
+				<value>com.asiainfo.boss4.domain.IUserPlanRb</value>
+				<value>com.asiainfo.boss4.domain.IUserStatusRb</value>
+				<value>com.asiainfo.boss4.domain.IAccBusiCreditRb</value>
+				<value>com.asiainfo.boss4.domain.IUserSmsOrderRb</value>
+				<value>com.asiainfo.boss4.domain.IUserSpromRule</value>
+				<value>com.asiainfo.boss4.domain.AccIntellnetUserCycle</value>
+				<value>com.asiainfo.boss4.domain.IIntfOper</value>
+				<value>com.asiainfo.boss4.domain.IMsisdnVsCust</value>
+				<value>com.asiainfo.boss4.domain.IMsisdnVsCustRb</value>
+				<value>com.asiainfo.boss4.domain.IUserSpromConfig</value>
+				<value>com.asiainfo.boss4.domain.IUserShareSprom</value>
+				<value>com.asiainfo.boss4.domain.IUserCellRb</value>
+				<value>com.asiainfo.boss4.domain.ISpromParamRb</value>
+			    <value>com.asiainfo.boss4.domain.IUserParamRb</value>
+				<value>com.asiainfo.boss4.domain.IMsisdnVsCustRb</value>
+				<value>com.asiainfo.boss4.domain.IUserStatusRecHis</value>
+				<value>com.asiainfo.boss4.domain.AccBusiSms</value>
+				<value>com.asiainfo.boss4.domain.AccCcNoPressStop</value>
+				<value>com.asiainfo.boss4.domain.AccCcNoPressStopHis</value>
+				<value>com.asiainfo.boss4.domain.InBusiBatch</value>
+				<value>com.asiainfo.boss4.domain.InBusiBatchDetail</value>
+				<value>com.asiainfo.boss4.domain.CpcTransRule</value>
+				<value>com.asiainfo.boss4.domain.IUserBillCycleRb</value>
+				<value>com.asiainfo.boss4.domain.IAcctBillCycleRb</value>
+				<value>com.asiainfo.boss4.domain.CmTaxpayerInfo</value>
+				<value>com.asiainfo.boss4.domain.CmAndTaxContact</value>
+				<value>com.asiainfo.boss4.domain.AccRemindSmsStat</value>
+				<value>com.asiainfo.boss4.domain.AccRemindUserLabel</value>
+				<value>com.asiainfo.boss4.domain.AccRemindSmsTemplet</value>
+				<value>com.asiainfo.boss4.domain.AccRemindSmsTempletH</value>
+				<value>com.asiainfo.boss4.domain.IUserLabel</value>
+				<value>com.asiainfo.boss4.domain.IUserLabelHis</value>
+				
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0101</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0102</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0103</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0104</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0105</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0106</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0107</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0108</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0109</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBalance0110</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0101</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0102</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0103</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0104</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0105</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0106</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0107</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0108</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0109</value>
+				<value>com.asiainfo.boss4.domain.partition.AccBookChgNotify0110</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0101</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0102</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0103</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0104</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0105</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0106</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0107</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0108</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0109</value>
+				<value>com.asiainfo.boss4.domain.partition.CcPlanInstanceRelation0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccBusiCredit0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccount0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IAcctBillCycle0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IAccSprom0110</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0101</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0102</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0103</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0104</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0105</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0106</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0107</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0108</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0109</value>
+				<value>com.asiainfo.boss4.domain.partition.ICustomer0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IFreeResRule0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroup0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMember0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IGroupMemberExterior0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IOrderOper0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IRaccOper0110</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0101</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0102</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0103</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0104</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0105</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0106</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0107</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0108</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0109</value>
+				<value>com.asiainfo.boss4.domain.partition.ISaleOper0110</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0101</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0102</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0103</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0104</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0105</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0106</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0107</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0108</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0109</value>
+				<value>com.asiainfo.boss4.domain.partition.ISpromParam0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUser0110</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0101</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0102</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0103</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0104</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0105</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0106</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0107</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0108</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0109</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserMap0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserBillCycle0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserCell0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserEnterprise0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMsc0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserMonitor0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrder0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserOrderDelay0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPayRelation0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPbx0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserPlan0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRelation0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserRoamRent0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserShareSprom0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserSprom0110</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0101</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0102</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0103</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0104</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0105</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0106</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0107</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0108</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0109</value>
+                <value>com.asiainfo.boss4.domain.partition.IUserParam0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatus0110</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0101</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0102</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0103</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0104</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0105</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0106</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0107</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0108</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0109</value>
+				<value>com.asiainfo.boss4.domain.partition.IUserStatusRec0110</value>
+			</list>
+		</property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+                <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+               	<!-- <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.cache.provider_class">${hibernate.cache.provider_class}</prop> -->
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.asiainfo.boss4.action.BusinessActionImpl.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* com.asiainfo.boss4.action.BusinessCrmActionImpl.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* com.asiainfo.boss4.action.QueryActionImpl.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* com.asiainfo.boss4.service.CpcOrderServiceImpl.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* com.asiainfo.boss4.service.InBusiBatchServiceImpl.*(..))" advice-ref="txAdvice"/>
+	</aop:config>
+    
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 
+			<tx:method name="get*" read-only="true" propagation="SUPPORTS"/>
+			<tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+			<tx:method name="get*" read-only="true" propagation="SUPPORTS"/>
+			<tx:method name="search*" read-only="true" propagation="SUPPORTS"/>
+			<tx:method name="creat*"/>
+			<tx:method name="update*"/>
+			<tx:method name="delete*"/> -->
+			<tx:method name="process" propagation="REQUIRES_NEW" rollback-for="Throwable"/>
+			<tx:method name="dispatch" rollback-for="Throwable"/>
+			<tx:method name="save*" rollback-for="Throwable"/>
+			<!-- 
+			<tx:method name="*" read-only="true" propagation="SUPPORTS" /> -->
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.asiainfo.report.action.ReportDispatchImpl.*(..))" advice-ref="txAdvice_report"/>
+	</aop:config>
+	
+	<tx:advice id="txAdvice_report" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Throwable"/>
+			
+		</tx:attributes>
+	</tx:advice>
+	
+</beans>

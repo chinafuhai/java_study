@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<import resource="classpath:org/codehaus/xfire/spring/xfire.xml" />
+
+	<bean id="onBoss4ServiceImpl" class="com.asiainfo.boss4.webservice.OnBoss4ServiceImpl"
+		autowire="byName" />
+	<!-- Boss4 报表接口 -->
+    <bean id="onBoss4ReportImpl" class="com.asiainfo.report.webservice.OnReportServiceImpl"
+		autowire="byName" />
+	<!-- Boss4 开通平台接口 -->
+    <bean id="OpenPlatService" class="com.asiainfo.openPlatform.webservice.OpenPlatWebserviceImpl"
+		autowire="byName" />	
+    <!-- START SNIPPET: xfire -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+            <map>
+                <entry key="/OnReportService">
+                    <ref bean="onReportWebService"/>
+                </entry>
+                <entry key="/OnBoss4Service">
+                    <ref bean="onBoss4WebService"/>
+                </entry>
+                <entry key="/OpenPlatService">
+                    <ref bean="openPlatWebservice"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Declare a parent bean with all properties common to both services -->
+    <bean id="onBoss4WebService" class="org.codehaus.xfire.spring.remoting.XFireExporter">
+        <property name="serviceFactory">
+            <ref bean="xfire.serviceFactory"/>
+        </property>
+        <property name="xfire">
+            <ref bean="xfire"/>
+        </property>
+        <property name="serviceBean">
+            <ref bean="onBoss4ServiceImpl"/>
+        </property>
+        <property name="serviceClass">
+            <value>com.asiainfo.boss4.webservice.OnBoss4Service</value>
+        </property>
+    </bean>
+    <bean id="onReportWebService" class="org.codehaus.xfire.spring.remoting.XFireExporter">
+        <property name="serviceFactory">
+            <ref bean="xfire.serviceFactory"/>
+        </property>
+        <property name="xfire">
+            <ref bean="xfire"/>
+        </property>
+        <property name="serviceBean">
+            <ref bean="onBoss4ReportImpl"/>
+        </property>
+        <property name="serviceClass">
+            <value>com.asiainfo.report.webservice.OnReportService</value>
+        </property>
+    </bean>
+    <bean id="openPlatWebservice" class="org.codehaus.xfire.spring.remoting.XFireExporter">
+        <property name="serviceFactory">
+            <ref bean="xfire.serviceFactory"/>
+        </property>
+        <property name="xfire">
+            <ref bean="xfire"/>
+        </property>
+        <property name="serviceBean">
+            <ref bean="OpenPlatService"/>
+        </property>
+        <property name="serviceClass">
+            <value>com.asiainfo.openPlatform.webservice.OpenPlatWebservice</value>
+        </property>
+    </bean>
+    <!-- END SNIPPET: xfire -->
+    
+</beans>

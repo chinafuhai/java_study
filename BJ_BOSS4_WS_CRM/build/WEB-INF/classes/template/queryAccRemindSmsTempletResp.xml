@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boss4Result>
+   <item>
+       <tranCode>${_TRANCODE}</tranCode>
+       <SID>${_SID}</SID>
+       <retCode>${_CODE}</retCode>
+       <retInfo>${_DESC}</retInfo>
+       <AccRemindSmsTemplet>
+           <segmentSeq>${segmentSeq}</segmentSeq>
+           <expression>${expression}</expression>
+           <smsContent>${smsContent}</smsContent>
+           <allowModify>${allowModify}</allowModify>
+           <priority>${priority}</priority>
+           <validDate>${validDate}</validDate>
+           <expireDate>${expireDate}</expireDate>
+       </AccRemindSmsTemplet>
+   </item>
+</boss4Result>

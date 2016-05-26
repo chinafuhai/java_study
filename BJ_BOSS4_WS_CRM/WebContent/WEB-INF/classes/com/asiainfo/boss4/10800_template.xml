@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cancelcau>
+	<item attr="1">
+		<tranCode>108001</tranCode>
+		<operType>3</operType>
+		<servId>${serv_id}</servId>
+		<msisdn>${phone_id}</msisdn>
+		<imsi/>
+		<acctId>${acct_id}</acctId>
+		<custId>${cust_id}</custId>
+		<userSts/>
+		<userType/>
+		<brand/>
+		<prodFlag/>
+		<mgntSts/>
+		<billType/>
+		<planId/>
+		<subStatus/>
+		<sid/>
+		<soNbr>${so_nbr}</soNbr>
+		<busiCode>0</busiCode>
+		<regionCode>100</regionCode>
+		<countyCode>1000</countyCode>
+		<orgId>99999999</orgId>
+		<groupId>0</groupId>
+		<commitDate>${sys_date}</commitDate>
+		<upField/>
+		<upDate/>
+		<remark/>
+		<expireDate>${sys_date}</expireDate>
+	</item>
+</cancelcau>

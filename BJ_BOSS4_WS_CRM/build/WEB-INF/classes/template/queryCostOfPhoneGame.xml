@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<code>${_CODE}</code>
+	<desc>${_DESC}</desc>
+	<msisdn>${msisdn}</msisdn>
+	<amountOfDay>${amountOfDay}</amountOfDay>
+	<amountOfMonth>${amountOfMonth}</amountOfMonth>
+</result>

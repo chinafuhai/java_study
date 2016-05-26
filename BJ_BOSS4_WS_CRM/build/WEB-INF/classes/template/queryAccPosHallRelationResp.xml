@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<code>${_CODE}</code>
+	<desc>${_DESC}</desc>
+	<AccPosHallRelation>
+	<bankCode>${bankCode}</bankCode>
+	<hallNo>${hallNo}</hallNo>
+	<posNo>${posNo}</posNo>
+	</AccPosHallRelation>
+</result>

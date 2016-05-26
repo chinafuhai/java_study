@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" 
+	default-autowire="byName">
+	<bean id="openPlatWebService" class="com.asiainfo.openPlatform.webservice.OpenPlatWebserviceImpl"/>
+	<bean id="openPlatService" class="com.asiainfo.openPlatform.service.openPlatServiceImpl" />
+	<bean id="openPlatDao" class="com.asiainfo.openPlatform.dao.openPlatDaoImpl" />
+	
+	<!-- 统一开通平台相关配置 -->
+    <!-- 同步开通接口Socket地址端口配置 -->
+    <bean id="SynSocketHosts" class="java.util.ArrayList">
+         <constructor-arg>
+            <list>
+               <value>10.7.5.195:16101</value>
+<!--           <value>10.7.6.241:16101</value>
+               <value>10.7.6.241:16102</value>
+               <value>10.7.6.242:16103</value>
+               <value>10.7.6.242:16104</value>-->
+            </list>
+         </constructor-arg>
+    </bean>  
+</beans>

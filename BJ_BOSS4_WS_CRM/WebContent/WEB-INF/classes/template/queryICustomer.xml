@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<code>${_CODE}</code>
+	<desc>${_DESC}</desc>
+	<ICustomer>
+	<caId>${caId}</caId>
+	<custId>${custId}</custId>
+	<custName>${custName}</custName>
+	<customerSts>${customerSts}</customerSts>
+	<createDate>${createDate}</createDate>
+	<validDate>${validDate}</validDate>
+	<expireDate>${expireDate}</expireDate>
+	</ICustomer>
+</result>

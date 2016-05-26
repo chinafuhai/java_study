@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+  <code>${_CODE!"999999"}</code>
+  <desc>${_DESC!"接口系统内部错误"}</desc>
+  <items>
+  	 <#if items??>
+     <#list items as head>
+     <RailwayHead>
+         <phoneHeadFrom>${head.phoneHeadFrom!""}</phoneHeadFrom>
+         <phoneHeadTo>${head.phoneHeadTo!""}</phoneHeadTo>
+         <validDate>${head.validDate?string("yyyy-MM-dd HH:mm:ss")!""}</validDate>
+         <expireDate>${head.expireDate?string("yyyy-MM-dd HH:mm:ss")!""}</expireDate>
+     </RailwayHead>
+     </#list>
+     </#if>
+  </items>
+</result>

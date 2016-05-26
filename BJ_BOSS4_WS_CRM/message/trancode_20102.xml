@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccountQuery>
+	<item>
+		<tranCode>20102</tranCode>
+		<dailybalSeq>2501551283</dailybalSeq><!--流水号-->
+		<businessDate>20160414</businessDate><!--营业日期-->
+		<modifierId>10125761</modifierId>
+		<updateDate>20160422</updateDate>
+		<hallNo>???????</hallNo>
+		<operatorId>10125761</operatorId><!--营业员编号-->
+		<notes>支票2笔 50000  416 POS单在2016-4-15日C21986日结里9笔15088</notes>
+		<ccbPosCount>10</ccbPosCount>
+		<checkCount>2</checkCount>
+		<otherBillCount>1</otherBillCount>
+		<cbPosCount/>
+		<status></status>
+		<ccbPosAmount>1598800</ccbPosAmount>
+		<ccbPosFee>0</ccbPosFee>
+		<minusCcbPosFee>0</minusCcbPosFee>
+		<plusCbPosAmount>0</plusCbPosAmount>
+		<cbPosAmount>0</cbPosAmount>
+		<minusCbPosAmount>0</minusCbPosAmount>
+		<generalLedgerAmount>0</generalLedgerAmount>
+		<generalLedgerAmountFree>0</generalLedgerAmountFree>
+		<generalLedgerAmountTele>0</generalLedgerAmountTele>
+		<minusArrearsAmount>0</minusArrearsAmount>
+		<minusOtherAmount>0</minusOtherAmount>
+		<minusOverflowAmount>0</minusOverflowAmount>
+		<totalAmount>6780150</totalAmount>
+		<netAmount>139750</netAmount>
+		<plusOverflowAmount>0</plusOverflowAmount>
+		<netCheckAmount>5041600</netCheckAmount>
+		<arrearsAmount>0</arrearsAmount>
+		<plusOtherAmount>0</plusOtherAmount>
+		<remotePayment>0</remotePayment>
+		<hallBossId>10002068</hallBossId><!--营业厅编号-->
+	</item>
+</AccountQuery>

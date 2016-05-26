@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BJ_BOSS4_WS" default="package" basedir=".">
+
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.5" />
+	<property name="source" value="1.5" />
+	<property name="dir.src" location="src" />
+	<property name="dir.script" location="script" />
+	<property name="dir.resource" location="config" />
+	<property name="dir.lib" value="WebContent/WEB-INF/lib" />
+	<property name="dir.WebRoot" value="WebContent" />
+	<property name="dir.build" location="build" />
+	<property name="dir.dist" location="dist" />
+	<property name="dir.tomcat.lib" location="lib-ext/tomcat" />
+	<!-- 
+	<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+	 -->
+
+	<path id="classpath">
+		<fileset dir="${dir.tomcat.lib}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${dir.lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean" description="清除所有生成的文件或目录">
+		<echo>清除所有生成的文件或目录</echo>
+		<delete dir="${dir.build}" />
+		<delete dir="${dir.dist}" />
+	</target>
+
+	<target name="init" depends="clean" description="初始化目录">
+		<echo>初始化目录</echo>
+		<mkdir dir="${dir.build}" />
+		<mkdir dir="${dir.build}/WEB-INF/classes" />
+		<mkdir dir="${dir.dist}" />
+	</target>
+
+	<target name="compile" depends="init" description="编译工程">
+		<echo>编译源码...</echo>
+		<javac debug="true" debuglevel="${debuglevel}" encoding="utf8" srcdir="${dir.src}" destdir="${dir.build}/WEB-INF/classes" classpathref="classpath" source="${source}" target="${target}" includeantruntime="false" />
+		<echo>拷贝资源...</echo>
+		<copy todir="${dir.build}/WEB-INF/classes">
+			<fileset dir="${dir.src}">
+				<include name="**/*.xml" />
+			</fileset>
+			<fileset dir="${dir.resource}">
+				<include name="**/*.*" />
+				<!--拷贝资源时不包括开通的配置文件-->
+				<exclude name="applicationContext-hibernate-kt.xml"/>
+				<exclude name="applicationContext-openPlat-service.xml"/>
+				<!-- 数据库配置手动添加 防止误操作 -->
+				<!-- <exclude name="jdbc.properties"/> -->
+			</fileset>
+		</copy>
+		<copy todir="${dir.build}/WEB-INF">
+			<fileset dir="WebContent/WEB-INF">
+				<include name="*.xml" />
+				<include name="lib/*.jar" />
+				<!-- BES环境下不需要一下jar包 -->
+				<exclude name="lib/xercesImpl-2.6.2.jar"/>
+				<exclude name="lib/xml-apis-1.0.b2.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${dir.build}">
+			<fileset dir="${dir.WebRoot}">
+				<include name="index.html"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="package" depends="compile" description="工程打包">
+		<echo>生成工程war包</echo>
+		<war warfile="${dir.dist}/BJ_BOSS4_WS.war" webxml="${dir.build}/WEB-INF/web.xml">
+			<lib dir="${dir.build}/WEB-INF/lib" />
+			<classes dir="${dir.build}/WEB-INF/classes" />
+			<fileset dir="${dir.build}">
+				<include name="WEB-INF/*.xml" />
+				<include name="index.html" />
+			</fileset>
+		</war>
+	</target>
+
+	<target name="send" description="发送报文">
+		<!-- 判断是否编译过，没有则进行初始化和编译动作 -->
+		<available file="WSClient.class" property="class.existed" type="file">
+			<filepath location="${dir.build}/com/asiainfo/boss4" />
+		</available>
+		<antcall target="script_init" />
+
+		<echo>向指定的WSDL发送报文</echo>
+		<java fork="true" classname="com.asiainfo.boss4.WSClient">
+			<classpath>
+				<path refid="classpath"/>
+				<path location="${dir.build}"/>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="script_init" unless="class.existed" description="初始化目录，编译工具脚本源码">
+		<antcall target="init" />
+		<echo>编译源码...</echo>
+		<javac debug="true" debuglevel="${debuglevel}" encoding="utf8" srcdir="${dir.src}" destdir="${dir.build}" classpathref="classpath" source="${source}" target="${target}" includeantruntime="false" />
+		<javac debug="true" debuglevel="${debuglevel}" encoding="utf8" srcdir="${dir.script}" destdir="${dir.build}" classpathref="classpath" source="${source}" target="${target}" includeantruntime="false" />
+		<echo>拷贝资源...</echo>
+		<copy todir="${dir.build}">
+			<fileset dir="${dir.src}">
+				<include name="**/*.xml" />
+			</fileset>
+			<fileset dir="${dir.resource}">
+				<include name="**/*.*" />
+				<!-- 数据库配置手动添加 防止误操作 -->
+				<!-- <exclude name="jdbc.properties"/> -->
+			</fileset>
+		</copy>
+		<copy todir="${dir.build}">
+			<fileset dir="${dir.script}">
+				<include name="*.xml" />
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- *********************************************开     通    接   口    程    序    打    包**********************************************-->
+	<!-- *********************************************操作方法：ant kt **********************************************-->
+	<target name="kt" depends="KTpackage">
+		<echo>编译打包开通代码完毕......</echo>
+	</target>
+	
+	<target name="KTpackage" depends="compileKT" description="工程打包">
+			<echo>生成开通程序工程war包</echo>
+			<war warfile="${dir.dist}/BJ_BOSS4_WS.war" webxml="${dir.build}/WEB-INF/web.xml">
+				<lib dir="${dir.build}/WEB-INF/lib" />
+				<classes dir="${dir.build}/WEB-INF/classes" />
+				<fileset dir="${dir.build}">
+					<include name="WEB-INF/*.xml" />
+					<include name="index.html" />
+				</fileset>
+			</war>
+	</target>
+	
+	<target name="compileKT" depends="init" description="编译工程">
+			<echo>编译源码...</echo>
+			<javac debug="true" debuglevel="${debuglevel}" encoding="utf8" srcdir="${dir.src}" destdir="${dir.build}/WEB-INF/classes" classpathref="classpath" source="${source}" target="${target}" includeantruntime="false" />
+			<echo>拷贝资源...</echo>
+			<copy todir="${dir.build}/WEB-INF/classes">
+				<fileset dir="${dir.src}">
+					<include name="**/*.xml" />
+				</fileset>
+				<fileset dir="${dir.resource}">
+					<include name="**/*.*" />
+					<!--拷贝资源时不包括正向接口的配置文件-->
+					<exclude name="applicationContext-hibernate.xml"/>
+					<exclude name="applicationContext-report-service.xml"/>
+					<!-- 数据库配置手动添加 防止误操作 -->
+					<!-- <exclude name="jdbc.properties"/> -->
+				</fileset>
+			</copy>
+			<copy todir="${dir.build}/WEB-INF">
+				<fileset dir="WebContent/WEB-INF">
+					<include name="*.xml" />
+					<include name="lib/*.jar" />
+					<!-- BES环境下不需要一下jar包 -->
+					<exclude name="lib/xercesImpl-2.6.2.jar"/>
+					<exclude name="lib/xml-apis-1.0.b2.jar"/>
+				</fileset>
+			</copy>
+			<copy todir="${dir.build}">
+				<fileset dir="${dir.WebRoot}">
+					<include name="index.html"/>
+				</fileset>
+			</copy>
+		</target>
+</project>

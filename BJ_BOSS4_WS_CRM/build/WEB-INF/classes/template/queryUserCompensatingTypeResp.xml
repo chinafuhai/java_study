@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Output>
+	<RunResult>
+		<retCode>${_CODE}</retCode>
+		<retInfo>${_DESC}</retInfo>
+	</RunResult>
+	<List>
+		<productId>${productId}</productId>
+		<productName>${productName}</productName>
+		<promFee>${promFee}</promFee>
+		<compensatingType>${compensatingType}</compensatingType>
+		<priority>${priority}</priority>
+		<itemName>${itemName}</itemName>
+	</List>
+</Output>

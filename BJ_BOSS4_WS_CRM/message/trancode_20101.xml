@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccountQuery>
+	<item>
+		<tranCode>20101</tranCode>
+		<balanceDate>20160421</balanceDate><!--获取结算日期-->
+		<operatorId>10879237</operatorId><!--营业员编号-->
+	</item>
+</AccountQuery>
+
+
+

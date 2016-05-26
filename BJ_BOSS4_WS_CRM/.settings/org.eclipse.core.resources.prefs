@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//config/jdbc.properties=UTF-8
+encoding//config/jdbc_kt.properties=UTF-8
+encoding//test/test-jdbc.properties=UTF-8
+encoding/<project>=UTF-8

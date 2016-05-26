@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<code>${_CODE}</code>
+	<desc>${_DESC}</desc>
+	<SpromParam>
+	<servId>${servId}</servId>
+	<soId>${soId}</soId>
+	<spromPara>${spromPara}</spromPara>
+	<keyId>${keyId}</keyId>
+	<validDate>${validDate}</validDate>
+	<expireDate>${expireDate}</expireDate>
+	</SpromParam>
+</result>

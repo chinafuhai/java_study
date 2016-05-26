@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<code>${_CODE!"999999"}</code>
+	<desc>${_DESC!"接口系统内部错误"}</desc>
+	<items>
+		<#if items??>
+		<#list items as entity>
+		<MinConAmount>
+			<soId>${entity.soId!""}</soId>
+			<minAmount>${entity.minAmount!""}</minAmount>
+			<promType>${entity.promType!""}</promType>
+			<validDate>${entity.validDate?string("yyyy-MM-dd HH:mm:ss")!""}</validDate>
+			<expireDate>${entity.expireDate?string("yyyy-MM-dd HH:mm:ss")!""}</expireDate>
+		</MinConAmount>
+		</#list>
+		</#if>
+	</items>
+</result>

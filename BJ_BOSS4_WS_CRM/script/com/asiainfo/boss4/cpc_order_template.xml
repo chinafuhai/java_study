@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProvBOSS>
+    <BIPCode>BIP6B643</BIPCode>
+    <BIPVer>0100</BIPVer>
+    <ActivityCode>T6101602</ActivityCode>
+    <ActionCode>0</ActionCode>
+    <ProcID>4346448</ProcID>
+    <TransIDO>1-142610982-1</TransIDO>
+    <ProcessTime>20110930131813</ProcessTime>
+    <TestFlag>0</TestFlag>
+    <MsgSender>1000</MsgSender>
+    <MsgReceiver>0002</MsgReceiver>
+    <SvcContVer>0100</SvcContVer>
+    <SvcCont><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<UDR>
+    <CrtT>20110930131813</CrtT>
+    <PkgSeq>1001109301318126</PkgSeq>
+	<UDSum>1</UDSum>
+	<UD>
+        <OprNumb>100201112290000000000</OprNumb>
+        <IDVA>${idva}</IDVA>
+        <IDVB>${idvb}</IDVB>
+        <Opr>${opr}</Opr>
+        <ChgFlg>${chg_flg}</ChgFlg>
+        <BillFlg>2</BillFlg>
+        <BizOrder>
+            <SPID>${sp_id}</SPID>
+            <SPBizCode>${sp_biz_code}</SPBizCode>
+        </BizOrder>
+        <Source>${source}</Source>
+        <Channel>99</Channel>
+        <EfftT>${efft_t}</EfftT>
+	</UD>
+</UDR>]]></SvcCont>
+</ProvBOSS>

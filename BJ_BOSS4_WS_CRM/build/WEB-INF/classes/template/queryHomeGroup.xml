@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<code>${_CODE!"999999"}</code>
+	<desc>${_DESC!"接口系统内部错误"}</desc>
+	<items>
+		<#if members??>
+		<#list members as item>
+		<IGroupMember>
+			<beginDate>${item.beginDate?string("yyyy-MM-dd HH:mm:ss")!""}</beginDate>
+			<groupId>${item.groupId!""}</groupId>
+			<property>${item.property!""}</property>
+			<priority>${item.priority!""}</priority>
+			<groupType>${item.groupType!""}</groupType>
+			<sid>${item.sid!""}</sid>
+			<remark>${item.remark!""}</remark>
+			<validDate>${item.validDate?string("yyyy-MM-dd HH:mm:ss")!""}</validDate>
+			<soNbr>${item.soNbr!""}</soNbr>
+			<regionCode>${item.regionCode!""}</regionCode>
+			<servId>${item.servId!""}</servId>
+			<operType>${item.operType!""}</operType>
+			<expireDate>${item.expireDate?string("yyyy-MM-dd HH:mm:ss")!""}</expireDate>
+		</IGroupMember>
+		</#list>
+		</#if>
+		<#if sproms??>
+		<#list sproms as item>
+		<IUserSprom>
+			<beginDate>${item.beginDate?string("yyyy-MM-dd HH:mm:ss")!""}</beginDate>
+			<busiType>${item.busiType!""}</busiType>
+			<expireDate>${item.expireDate?string("yyyy-MM-dd HH:mm:ss")!""}</expireDate>
+			<maxProm>${item.maxProm!""}</maxProm>
+			<operType>${item.operType!""}</operType>
+			<payMode>${item.payMode!""}</payMode>
+			<planId>${item.planId!""}</planId>
+			<property>${item.property!""}</property>
+			<referenceObject>${item.referenceObject!""}</referenceObject>
+			<regionCode>${item.regionCode!""}</regionCode>
+			<remark>${item.remark!""}</remark>
+			<resultObject>${item.resultObject!""}</resultObject>
+			<serviceId>${item.serviceId!""}</serviceId>
+			<servId>${item.servId!""}</servId>
+			<sid>${item.sid!""}</sid>
+			<soId>${item.soId!""}</soId>
+			<soNbr>${item.soNbr!""}</soNbr>
+			<spromId>${item.spromId!""}</spromId>
+			<spromPara>${item.spromPara!""}</spromPara>
+			<spromPrior>${item.spromPrior!""}</spromPrior>
+			<spromType>${item.spromType!""}</spromType>
+			<validDate>${item.validDate?string("yyyy-MM-dd HH:mm:ss")!""}</validDate>
+			<centralMsisdn>${item.centralMsisdn!""}</centralMsisdn>
+			<memberMsisdn>${item.memberMsisdn!""}</memberMsisdn>
+		</IUserSprom>
+		</#list>
+		</#if>
+	</items>
+</result>

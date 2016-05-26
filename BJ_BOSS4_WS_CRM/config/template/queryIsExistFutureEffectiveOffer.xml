@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FutureEffectiveOfferInfo>
+	<returnCode>${_CODE}</returnCode>
+	<codeDesc>${_DESC}</codeDesc>
+	<futureEffectiveOfferFlag>${_Y_OR_N}</futureEffectiveOfferFlag>
+</FutureEffectiveOfferInfo>

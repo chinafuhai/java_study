@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd" 
+	default-autowire="byName">
+	
+	<bean id="appConfig" class="com.asiainfo.boss4.support.AppConfig" />
+	<bean id="fileCache" class="com.asiainfo.boss4.support.FileCache">
+		<property name="xmlFilenames">
+			<map>
+				<entry key="30001" value="template/querySuspendRecordInfo.xml" />
+				<entry key="30002" value="template/querySubscriberCredit.xml" />
+				<entry key="30003" value="template/getSubscriberInfoDtl.xml" />
+				<entry key="30004" value="template/queryIsExistFutureEffectiveOffer.xml" />
+				<entry key="30005" value="template/querySMSOutReqFromSiebel.xml" />
+				<entry key="30006" value="template/queryOrderFromlog.xml" />
+				<entry key="30007" value="template/queryOrderFromlog.xml" />
+				<entry key="30008" value="template/queryOrderFromlog.xml" />
+				<entry key="30011" value="template/queryOrderFromlog.xml" />
+				<entry key="30012" value="template/queryOrderFromlog.xml" />
+				<entry key="30013" value="template/queryCostOfPhoneGame.xml" />
+				
+				<entry key="query_crm_id" value="template/queryCrmIdResponse.xml" />
+			</map>
+		</property>
+		<property name="templateFilenames">
+			<map>
+				<entry key="common_response" value="template/commonResponse.xml" />
+				<entry key="30014" value="template/queryRailwayHead.xml" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="contextHelper" class="com.asiainfo.boss4.service.ContextHelper" />
+
+</beans>
