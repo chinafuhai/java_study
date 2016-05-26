@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-	<obd>
-		<address>http://10.7.5.165:13111/axis/services</address>
-	</obd>
-</root>		

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<result>
-	<code>${_CODE}</code>
-	<desc>${_DESC}</desc>
-	<IAccount>
-	<acctId>${acctId}</acctId>
-	<baId>${baId}</baId>
-	</IAccount>
-</result>

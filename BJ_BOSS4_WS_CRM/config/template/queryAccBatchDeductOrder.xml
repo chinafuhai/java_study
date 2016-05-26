@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Output>
-${list}
-<RunResult>
-<retCode>${_CODE}</retCode>
-<retInfo>${_DESC}</retInfo>
-</RunResult>
-</Output>
